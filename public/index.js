@@ -42,7 +42,7 @@ const input = document.getElementById("textwhpform");
 
 
 // Importa la función desde index.js
-import { miFuncion} from './whpformconvert.js';
+//import { miFuncion} from './whpformconvert.js';
 // Llama a la función importada
 
 let direccion="", celular="", ciudad="";
@@ -72,8 +72,7 @@ const loginac = document.getElementById("loginac");
 const myDiv = document.getElementById("sliderinisesion");
 const info = document.getElementById("idinfo");
 
-
-//Grabar registro de contacto en Realtime Database
+/*/Grabar registro de contacto en Realtime Database
 cmdgrabaregcontacti.addEventListener("click", () => {
  onAuthStateChanged(auth, (user) => {
   if (user) {
@@ -135,7 +134,7 @@ cmdgrabaregcontacti.addEventListener("click", () => {
 });    
 });
 // !!!! fin grabar registro
-
+*/
 
 login.addEventListener("click", (e) => {
   signInWithRedirect(auth, provider);
