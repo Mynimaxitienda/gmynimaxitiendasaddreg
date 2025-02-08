@@ -10,6 +10,7 @@
 
 //Firebase: Authentication
 //Google Firebase : Google Popu up
+import { getIdTokenResult } from "firebase/auth";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 
 import {
@@ -70,8 +71,13 @@ const emailsesion = document.getElementById("emailinisesion");
 const logininac = document.getElementById("logininac");
 const loginac = document.getElementById("loginac");
 //const myDiv = document.getElementById("sliderinisesion");
-//const info = document.getElementById("idinfo");
-const loginactivo =  document.getElementById("loginactivo");
+const info = document.getElementById("idinfo");
+const loginactivo = document.getElementById("loginactivo");
+const cmdlimpiar = document.getElementById("cmdlimpiar");
+const textwhp = document.getElementById("textwhpform");
+const result = document.getElementById("resultado");
+const idresout = document.getElementById("idresout");
+const cmdgrabaregcontacti = document.getElementById("cmdgrabaregcontacti");
 
 login.addEventListener("click", (e) => {
   signInWithRedirect(auth, provider);
@@ -94,7 +100,6 @@ login.addEventListener("click", (e) => {
       // ...
     });
 });
-
 
 
 //CERRAR SESION
@@ -199,3 +204,77 @@ onAuthStateChanged(auth, (user) => {
     //myDiv.style.backgroundColor = "lightblue";
   }
 });
+
+cmdlimpiar.addEventListener('click', () => {
+  // Limpiar text
+  textwhp.value = "";
+  result.value = "";
+  info.innerText= "Info ...";
+  idresout.innerText="(Resultado Registro Whp Form...)";
+});
+
+
+//Grabar registro de contacto en Realtime Database
+cmdgrabaregcontacti.addEventListener("click", () => {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      var idresout = document.getElementById('idresout');
+      // El usuario ya ha iniciado sesión
+      const uid = user.uid;
+      const uname = user.displayName;
+      const uemail = user.email;
+      let id = 1;
+      // Codificar el email en Base64
+      var emailEncoded = btoa(uemail);
+
+      //Datos de contacto. Asignados al vector
+      var resultado = miFuncion(input.value);
+      var arregloDatos = [];
+      arregloDatos = resultado.split(",");
+      //#respuesta + email encode: llave principal de registro
+      //emailEncoded = ""+arregloDatos[0] + emailEncoded;    
+      //const emailEncoded = btoa(uemail); // Codificar el email en Base64    
+
+      var resp = arregloDatos[0].trim() + "_" + emailEncoded;
+      var resp1 = arregloDatos[1].trim();
+      var resp2 = arregloDatos[2].trim();
+      var resp3 = arregloDatos[3].trim();
+      var resp4 = arregloDatos[4].trim();
+      var resp5 = arregloDatos[5].trim();
+
+      const db = getDatabase();
+      const dbf = ref(db, "usuario/respuesta:" + resp);
+      onValue(dbf, (snapshot) => {
+        let data = snapshot.val();
+        var path = "usuario/respuesta:" + resp;
+        // Luego, puedes usar 'path' en tu función set
+        set(ref(db, path), {
+          nombre: resp1,
+          correoelectronico: resp2,
+          whatsapp: resp3,
+          preferencias: resp4,
+          observaciones: resp5
+        });
+      });
+
+      info.innerText = "Registro Grabado Correctamente";
+
+      //const vectorDatos = ["10004", "Olaf Luzardo", "devluisluzardo@gmail.com", "+57 3236992344", "Avena", "Ssss"];
+      var claves = ["Respuesta #", "Nombre", "Correo electronico", "Whatsapp", "Preferencias", "Observaciones"];
+      var objetoRespuesta = {};
+      for (var i = 0; i < arregloDatos.length; i++) {
+        objetoRespuesta[claves[i]] = arregloDatos[i];
+      }
+      //console.log(JSON.stringify(objetoRespuesta, null, 2));
+      idresout.innerText = arregloDatos[0] + "" + JSON.stringify(objetoRespuesta, null, 2);
+      // arregloDatos =[];
+    } else {
+      // El usuariono ha iniciado sesión
+      //console.log("Usuario no autenticado.");    
+      info.innerText = "Usuario no autenticado.";
+    }
+  });
+});
+// !!!! fin grabar registro
+
+

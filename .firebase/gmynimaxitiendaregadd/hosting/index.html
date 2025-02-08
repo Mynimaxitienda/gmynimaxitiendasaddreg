@@ -10,9 +10,56 @@
     <link rel="icon" type="image/x-icon" href="/assets/favicon-01c58db5.ico" />
     
     
-    
-  <script type="module" crossorigin src="/assets/index-7f6495bf.js"></script>
-  <link rel="stylesheet" href="/assets/index-8837754e.css">
+
+    <style>
+        /* Estilos para centrar el formulario */
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Centrar verticalmente si es necesario */
+            min-height: 50vh;
+            /* Asegurar una altura mínima para el centrado vertical */
+            margin-top: 100px;
+            /* Ajustar según la altura del encabezado */
+        }
+
+        .form-wrapper {
+            width: 80%;
+            /* O un ancho fijo si lo prefieres */
+            max-width: 600px;
+            /* Ancho máximo para pantallas grandes */
+            padding: 20px;
+            border: 1px solid #ced4da;
+            /* Un borde opcional */
+            border-radius: 5px;
+            background-color: #f8f9fa;
+            /* Un color de fondo suave */
+        }
+
+        .prompt-box {
+            margin-bottom: 15px;
+        }
+
+        .prompt-box label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .prompt-box input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+
+        .prompt-box button {
+            margin-right: 10px;
+        }
+    </style>
+
+  <script type="module" crossorigin src="/assets/index-8b48ff83.js"></script>
+  <link rel="stylesheet" href="/assets/index-dccb97f5.css">
 </head>
 
 
@@ -56,14 +103,38 @@
                 <button type="button" class="btn btn-info rounded-pill custom-button" id="cerrarsesion">
                     Cerrar Sesión
                 </button>
-            </div>         
-            
+            </div>
+
         </div>
 
-       
         <!-- FORM -->
+        <div class="form-container">
+            <div class="form-wrapper">
+                <div class="prompt-box">
+                    <input type="text" id="textwhpform" name="prompt" placeholder="Pegar Whastsapp Form" value="">
+                </div>
+                <div class="prompt-box">
+                    <input type="text" id="resultado" name="prompt" placeholder="Pegar Datos con Whastsapp Form"
+                        value="">
+                </div>
+                <div class="prompt-box">
+                    <button class="btn btn-info rounded-pill custom-buttonfrm" id="cmdlimpiar">Limpiar</button>
+                    <button class="btn btn-info rounded-pill custom-buttonfrm" id="ejecutarFuncion">Go</button>
+                    <button class="btn btn-info rounded-pill custom-buttonfrm" id="cmdgrabaregcontacti">Grabar</button>
+                </div>
+                <div class="prompt-box">
+                    <p id="idinfo">Info...</p>
+                </div>
+                <div class="prompt-box">
+                    <p id="idresout" class="output">(Resultado Registro Whp Form...)</p>
+                </div>
+                <div class="prompt-box">
+                    <p id="idjsondata" class="output"></p>
+                </div>
+            </div>
+        </div>
 
-
+        <!-- FOOTER -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-bottom py-3 d-flex">
             <div class="text-center text-dark p-3">
                 © 2024 Copyright:
@@ -101,6 +172,7 @@
         });
     });
 </script>
+
 
 
 
