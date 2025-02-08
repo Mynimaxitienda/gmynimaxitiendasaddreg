@@ -10,8 +10,7 @@
 
 //Firebase: Authentication
 //Google Firebase : Google Popu up
-import { getIdTokenResult } from "firebase/auth";
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
 
 import {
   getAuth,
@@ -20,7 +19,7 @@ import {
   getRedirectResult,
   onAuthStateChanged,
   signOut
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
 
 //Firebase: RealTime Database
 import {
@@ -35,15 +34,13 @@ import {
   equalTo,
   child,
   update
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-
+} from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
 
 //texto original: plantilla contacto whp form
 const input = document.getElementById("textwhpform");
 
-
 // Importa la función desde index.js
-//import { miFuncion} from './whpformconvert.js';
+import { miFuncion} from './whpformconvert.js';
 // Llama a la función importada
 
 let direccion = "", celular = "", ciudad = "";
@@ -101,7 +98,6 @@ login.addEventListener("click", (e) => {
     });
 });
 
-
 //CERRAR SESION
 cerrarsesion.addEventListener("click", (e) => {
   auth.signOut()
@@ -123,7 +119,6 @@ cerrarsesion.addEventListener("click", (e) => {
     });
 });
 //---
-
 
 //AL cambiar el estado de autenticacion
 onAuthStateChanged(auth, (user) => {
@@ -213,7 +208,6 @@ cmdlimpiar.addEventListener('click', () => {
   idresout.innerText="(Resultado Registro Whp Form...)";
 });
 
-
 //Grabar registro de contacto en Realtime Database
 cmdgrabaregcontacti.addEventListener("click", () => {
   onAuthStateChanged(auth, (user) => {
@@ -276,5 +270,4 @@ cmdgrabaregcontacti.addEventListener("click", () => {
   });
 });
 // !!!! fin grabar registro
-
 

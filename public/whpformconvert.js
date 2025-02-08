@@ -21,7 +21,6 @@ cmdlimpiar.addEventListener("click", () => {
     info.innerText = "" + "Info..";
 });
 
-
 // Agrega un event listener al botón para que ejecute la función al hacer clic
 boton.addEventListener("click", () => {
     const cadena = input.value;
@@ -52,7 +51,6 @@ function eliminarCamposEspecificosSinRegex(cadena, camposAEliminar) {
     return resultado.trim();
 }
 
-
 //Llamadana Función Externa.bdesde index.js
 export function miFuncion(cadenaOriginal) {
     const camposAEliminar = [
@@ -79,7 +77,6 @@ export function miFuncion(cadenaOriginal) {
     return "" + cadenaProcesada;
 }
 //fin exportar registro
-
 
 function eliminarCamposEspecificosSinRegexYAlmacenar(cadena, camposAEliminar) {
     let resultado = cadena;
@@ -111,5 +108,3 @@ function eliminarCamposEspecificosSinRegexYAlmacenar(cadena, camposAEliminar) {
 
 //exportar numero de respuesta
 //export keyregcontac = arregloDatos[0];
-
-
