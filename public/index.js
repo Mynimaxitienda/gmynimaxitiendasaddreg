@@ -10,7 +10,7 @@
 
 //Firebase: Authentication
 //Google Firebase : Google Popu up
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 
 import {
   getAuth,
@@ -19,7 +19,7 @@ import {
   getRedirectResult,
   onAuthStateChanged,
   signOut
-} from "https://www.gstatic.com/firebasejs/11.3.0/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 //Firebase: RealTime Database
 import {
@@ -34,7 +34,7 @@ import {
   equalTo,
   child,
   update
-} from "https://www.gstatic.com/firebasejs/11.3.0/firebase-database.js";
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 
 //texto original: plantilla contacto whp form
@@ -70,71 +70,8 @@ const emailsesion = document.getElementById("emailinisesion");
 const logininac = document.getElementById("logininac");
 const loginac = document.getElementById("loginac");
 //const myDiv = document.getElementById("sliderinisesion");
-const info = document.getElementById("idinfo");
-
-/*/Grabar registro de contacto en Realtime Database
-cmdgrabaregcontacti.addEventListener("click", () => {
- onAuthStateChanged(auth, (user) => {
-  if (user) {
-    var idresout = document.getElementById('idresout');
-    // El usuario ya ha iniciado sesión
-    const uid    = user.uid;
-    const uname  = user.displayName;
-    const uemail = user.email;
-    let id       = 1;
-    // Codificar el email en Base64
-    var emailEncoded = btoa(uemail);
-    
-    //Datos de contacto. Asignados al vector
-    var resultado = miFuncion(input.value);
-    var arregloDatos = [];
-    arregloDatos = resultado.split(",");
-    //#respuesta + email encode: llave principal de registro
-    //emailEncoded = ""+arregloDatos[0] + emailEncoded;    
-    //const emailEncoded = btoa(uemail); // Codificar el email en Base64    
-    
-    var resp = arregloDatos[0].trim()+"_"+emailEncoded;
-    var resp1 = arregloDatos[1].trim();
-    var resp2 = arregloDatos[2].trim();
-    var resp3 = arregloDatos[3].trim();
-    var resp4 = arregloDatos[4].trim();
-    var resp5 = arregloDatos[5].trim();
-    
-      const db = getDatabase();
-      const dbf = ref(db, "usuario/respuesta:" + resp);
-      onValue(dbf, (snapshot) => {
-        let data = snapshot.val();    
-          var path = "usuario/respuesta:" + resp;
-          // Luego, puedes usar 'path' en tu función set
-          set(ref(db, path), {
-            nombre : resp1,
-            correoelectronico : resp2,
-            whatsapp : resp3,
-            preferencias : resp4,
-            observaciones : resp5           
-          });            
-      });
-      
-      info.innerText = "Registro Grabado Correctamente";
-         
-    //const vectorDatos = ["10004", "Olaf Luzardo", "devluisluzardo@gmail.com", "+57 3236992344", "Avena", "Ssss"];
-    var claves = ["Respuesta #", "Nombre", "Correo electronico", "Whatsapp", "Preferencias", "Observaciones"];
-    var objetoRespuesta = {};
-    for (var i = 0; i < arregloDatos.length; i++) {
-      objetoRespuesta[claves[i]] = arregloDatos[i];
-    } 
-    //console.log(JSON.stringify(objetoRespuesta, null, 2));
-    idresout.innerText = arregloDatos[0] + "" + JSON.stringify(objetoRespuesta, null, 2);         
-    // arregloDatos =[];
-  } else {
-    // El usuariono ha iniciado sesión
-    //console.log("Usuario no autenticado.");    
-    info.innerText = "Usuario no autenticado.";
- }
-});    
-});
-// !!!! fin grabar registro
-*/
+//const info = document.getElementById("idinfo");
+const loginactivo =  document.getElementById("loginactivo");
 
 login.addEventListener("click", (e) => {
   signInWithRedirect(auth, provider);
@@ -203,7 +140,7 @@ onAuthStateChanged(auth, (user) => {
         ///console.log('Hay un valor en el nodo: ......... ');
         //console.log(data);
 
-        info.innerText = "Usuario autenticado. " + uemail;
+        //info.value = "Usuario autenticado. " + uemail;               
 
         //--- porque el usuario ya fue autenticado
         //ocultar login
@@ -217,6 +154,8 @@ onAuthStateChanged(auth, (user) => {
         //Modtrar texto          
         document.getElementById("emailinisesion").innerText = uemail;
         //myDiv.style.backgroundColor = "lightblue";
+        //ocultar login inactivo
+        document.getElementById("logininac").style.display = "none";
         //---
       }
       else {
@@ -230,10 +169,11 @@ onAuthStateChanged(auth, (user) => {
         //Mostrar texto          
         document.getElementById("emailinisesion").innerText = "Email";
         //myDiv.style.backgroundColor = "lightblue";
-
+        //Ver login inactivo
+        document.getElementById("logininac").style.display = "block";
         //---  
         // Si data es nulo, significa que no hay un valor en el nodo
-        console.log('No hay un valor en el nodo');
+        //console.log('No hay un valor en el nodo');
         const path = 'usuario/idkey:' + emailEncoded;
         // Luego, puedes usar 'path' en tu función set
         set(ref(db, path), {
@@ -248,7 +188,7 @@ onAuthStateChanged(auth, (user) => {
     // ...
   }
   else {
-    // User is signed out
+    // User is signed out .
     //Desplegamos
     login.style.display = "block";
     loginactivo.style.display = "none";
@@ -259,6 +199,3 @@ onAuthStateChanged(auth, (user) => {
     //myDiv.style.backgroundColor = "lightblue";
   }
 });
-
-
-
